@@ -20,24 +20,24 @@
     value = [value uppercaseString];
     
     if ([value isEqualToString:@"BANNER"]) {
-        return GADAdSizeBanner;
+        return kGADAdSizeBanner;
     } else if ([value isEqualToString:@"FLUID"]) {
-        return GADAdSizeFluid;
+        return kGADAdSizeFluid;
     } else if ([value isEqualToString:@"WIDE_SKYSCRAPER"]) {
-        return GADAdSizeSkyscraper;
+        return kGADAdSizeSkyscraper;
     } else if ([value isEqualToString:@"LARGE_BANNER"]) {
-        return GADAdSizeLargeBanner;
+        return kGADAdSizeLargeBanner;
     } else if ([value isEqualToString:@"MEDIUM_RECTANGLE"]) {
-        return GADAdSizeMediumRectangle;
+        return kGADAdSizeMediumRectangle;
     } else if ([value isEqualToString:@"FULL_BANNER"]) {
-        return GADAdSizeFullBanner;
+        return kGADAdSizeFullBanner;
     } else if ([value isEqualToString:@"LEADERBOARD"]) {
-        return GADAdSizeLeaderboard;
+        return kGADAdSizeLeaderboard;
     } else if ([value isEqualToString:@"ADAPTIVE_BANNER"]) {
         CGFloat viewWidth = [[UIScreen mainScreen]bounds].size.width;
         return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
     } else {
-        return GADAdSizeInvalid;
+        return kGADAdSizeInvalid;
     }
 }
 
@@ -45,7 +45,7 @@
     __block NSMutableArray *adSizes = [[NSMutableArray alloc] initWithCapacity:strings.count];
     [strings enumerateObjectsUsingBlock:^(id jsonValue, NSUInteger idx, __unused BOOL *stop) {
         GADAdSize adSize = [RNAdMobCommon stringToAdSize:jsonValue];
-        if (GADAdSizeEqualToSize(adSize, GADAdSizeInvalid)) {
+        if (GADAdSizeEqualToSize(adSize, kGADAdSizeInvalid)) {
             RCTLogWarn(@"Invalid adSize %@", jsonValue);
         } else {
             [adSizes addObject:NSValueFromGADAdSize(adSize)];
