@@ -20,24 +20,24 @@
     value = [value uppercaseString];
     
     if ([value isEqualToString:@"BANNER"]) {
-        return kGADAdSizeBanner;
+        return GADAdSizeBanner;
     } else if ([value isEqualToString:@"FLUID"]) {
-        return kGADAdSizeFluid;
+        return GADAdSizeFluid;
     } else if ([value isEqualToString:@"WIDE_SKYSCRAPER"]) {
-        return kGADAdSizeSkyscraper;
+        return GADAdSizeSkyscraper;
     } else if ([value isEqualToString:@"LARGE_BANNER"]) {
-        return kGADAdSizeLargeBanner;
+        return GADAdSizeLargeBanner;
     } else if ([value isEqualToString:@"MEDIUM_RECTANGLE"]) {
-        return kGADAdSizeMediumRectangle;
+        return GADAdSizeMediumRectangle;
     } else if ([value isEqualToString:@"FULL_BANNER"]) {
-        return kGADAdSizeFullBanner;
+        return GADAdSizeFullBanner;
     } else if ([value isEqualToString:@"LEADERBOARD"]) {
-        return kGADAdSizeLeaderboard;
+        return GADAdSizeLeaderboard;
     } else if ([value isEqualToString:@"ADAPTIVE_BANNER"]) {
         CGFloat viewWidth = [[UIScreen mainScreen]bounds].size.width;
         return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
     } else {
-        return kGADAdSizeInvalid;
+        return GADAdSizeInvalid;
     }
 }
 
@@ -45,7 +45,7 @@
     __block NSMutableArray *adSizes = [[NSMutableArray alloc] initWithCapacity:strings.count];
     [strings enumerateObjectsUsingBlock:^(id jsonValue, NSUInteger idx, __unused BOOL *stop) {
         GADAdSize adSize = [RNAdMobCommon stringToAdSize:jsonValue];
-        if (GADAdSizeEqualToSize(adSize, kGADAdSizeInvalid)) {
+        if (GADAdSizeEqualToSize(adSize, GADAdSizeInvalid)) {
             RCTLogWarn(@"Invalid adSize %@", jsonValue);
         } else {
             [adSizes addObject:NSValueFromGADAdSize(adSize)];
@@ -78,10 +78,6 @@
         request.keywords = requestOptions[@"keywords"];
     }
     
-    if (requestOptions[@"location"]) {
-        NSArray<NSNumber *> *latLong = requestOptions[@"location"];
-        [request setLocationWithLatitude:[latLong[0] doubleValue] longitude:[latLong[1] doubleValue] accuracy:[requestOptions[@"locationAccuracy"] doubleValue]];
-    }
     
     if (requestOptions[@"contentUrl"]) {
         request.contentURL = requestOptions[@"contentUrl"];
