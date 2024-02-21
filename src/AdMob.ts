@@ -6,11 +6,10 @@ const RNAdMobAdManager = NativeModules.RNAdMob;
 
 /**
  * Initializes Mobile Ads SDK.
- * @deprecated since version 1.2.0, SDK is initialized automatically. Use `getInitializationStatus` instead if you need to get adapters' initialization status.
  * @returns Promise of each mediation adapter's initialization status
  */
 async function initialize(): Promise<InitializationStatus[]> {
-  return getInitializationStatus();
+  return RNAdMobAdManager.initialize();
 }
 
 /**
