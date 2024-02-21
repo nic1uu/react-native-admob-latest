@@ -33,7 +33,7 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(initialize:(RCTPromiseResolveBlock) resolve rejecter:(RCTPromiseRejectBlock) reject)
 {
    GADMobileAds *ads = [GADMobileAds sharedInstance];
-    ads.requestConfiguration.testDeviceIdentifiers = @[GADSimulatorID];
+   
   [ads startWithCompletionHandler:^(GADInitializationStatus *status) {
      if (status == nil) {
         reject(@"E_MOBILE_ADS_NOT_INITIALIZED", @"MobileAds SDK is not initialized yet.", nil);
@@ -98,17 +98,17 @@ RCT_EXPORT_METHOD(setRequestConfiguration:(NSDictionary *)config)
     
     if ([[config allKeys] containsObject:@"tagForChildDirectedTreatment"]) {
         NSNumber *tag = [config valueForKey:@"tagForChildDirectedTreatment"];
-        [[[GADMobileAds sharedInstance] requestConfiguration] tagForChildDirectedTreatment:tag.boolValue];
+        [[[GADMobileAds sharedInstance] requestConfiguration] setTagForChildDirectedTreatment:tag];
+       
     };
     
     if ([[config allKeys] containsObject:@"tagForUnderAgeConsent"]) {
         NSNumber *tagC = [config valueForKey:@"tagForUnderAgeConsent"];
-        [[[GADMobileAds sharedInstance] requestConfiguration] tagForUnderAgeOfConsent:tagC.boolValue];
+        [[[GADMobileAds sharedInstance] requestConfiguration] setTagForUnderAgeOfConsent:tagC];
     };
     
     if ([[config allKeys] containsObject:@"testDeviceIds"]) {
         NSMutableArray *testDevices = [config valueForKey:@"testDeviceIds"];
-        [testDevices addObject:GADSimulatorID];
         [[[GADMobileAds sharedInstance] requestConfiguration] setTestDeviceIdentifiers:testDevices];
     };
 }
