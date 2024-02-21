@@ -1,5 +1,7 @@
 package com.rnadmob.admob;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Arguments;
@@ -15,16 +17,17 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.AdapterStatus;
 import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
 public class RNAdMobModule extends ReactContextBaseJavaModule {
-
+    ReactApplicationContext _context;
     public RNAdMobModule(ReactApplicationContext context) {
         super(context);
-        MobileAds.initialize(context);
+        _context = context;
     }
 
     @NonNull
@@ -33,6 +36,15 @@ public class RNAdMobModule extends ReactContextBaseJavaModule {
         return "RNAdMob";
     }
 
+    @ReactMethod
+    public void initialize(Promise promise) {
+        MobileAds.initialize(_context, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                getInitializationStatus(promise);
+            }
+        });
+    }
     @ReactMethod
     public void getInitializationStatus(Promise promise) {
         InitializationStatus status = MobileAds.getInitializationStatus();
