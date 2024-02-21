@@ -41,7 +41,7 @@ class RNAdMobAppOpen: RNAdMobFullScreenAd<GADAppOpenAd> {
     }
     
     override func load(unitId: String, adRequest: GADRequest, adLoadDelegate: RNAdMobFullScreenAd<GADAppOpenAd>.AdLoadDelegate, fullScreenContentDelegate: RNAdMobFullScreenAd<GADAppOpenAd>.FullScreenContentDelegate) {
-        GADAppOpenAd.load(withAdUnitID adUnitID: String, request: GADRequest?) {
+      GADAppOpenAd.load(withAdUnitID: unitId, request: adRequest) {
             (ad, error) in
             if (error != nil) {
                 adLoadDelegate.onAdFailedToLoad(error: error!)
