@@ -1,5 +1,8 @@
 import { InitializationStatus, RequestConfiguration } from './types';
-
+/**
+ * Initializes Mobile Ads SDK.
+ * @returns Promise of each mediation adapter's initialization status
+ */
 declare function initialize(): Promise<InitializationStatus[]>;
 /**
  * Get Mobile Ads SDK initialization status.
