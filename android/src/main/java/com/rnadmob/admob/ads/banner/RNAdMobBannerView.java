@@ -19,6 +19,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.admanager.AdManagerAdRequest;
 import com.google.android.gms.ads.admanager.AdManagerAdView;
@@ -31,7 +32,7 @@ import javax.annotation.Nonnull;
 
 public class RNAdMobBannerView extends ReactViewGroup implements AppEventListener {
 
-    private AdManagerAdView adView;
+    private AdView adView;
 
     private AdSize size;
     private AdSize[] sizes;
@@ -40,7 +41,6 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
 
     public RNAdMobBannerView(Context context) {
         super(context);
-
         initAdView();
     }
 
@@ -49,7 +49,7 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
             removeView(adView);
             adView.destroy();
         }
-        adView = new AdManagerAdView(getContext());
+        adView = new AdView(getContext());
         adView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         adView.setAdListener(new AdListener() {
             @Override
@@ -92,8 +92,7 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
             }
 
         });
-        if (RNAdMobCommon.getIsAdManager(unitId))
-            adView.setAppEventListener(this);
+
         addView(adView);
     }
 
@@ -124,7 +123,7 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
     }
 
     public void requestAd() {
-        if ((size == null && sizes == null) || unitId == null || request == null) {
+        if (size == null || unitId == null || request == null) {
             return;
         }
 
@@ -132,14 +131,7 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
 
         adView.setAdUnitId(unitId);
         if (size != null) {
-            adView.setAdSizes(size);
-        }
-        if (sizes != null) {
-            if ((RNAdMobCommon.getIsAdManager(unitId))) {
-                adView.setAdSizes(sizes);
-            } else {
-                throw new Error("Trying to set sizes on non Ad Manager unit Id");
-            }
+            adView.setAdSize(size);
         }
         adView.loadAd(request);
     }

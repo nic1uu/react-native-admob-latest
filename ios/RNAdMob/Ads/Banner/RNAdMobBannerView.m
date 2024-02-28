@@ -27,27 +27,19 @@
 
 - (void)requestAd
 {
-    if (_unitId == nil || (_size == nil && _sizes == nil) || _requestOptions == nil) {
+    if (_unitId == nil || _size == nil  || _requestOptions == nil) {
         return;
     }
     GADAdSize size = [RNAdMobCommon stringToAdSize:_size ? _size : _sizes[0]];
     if (!_bannerView) {
-        _bannerView = [[GAMBannerView alloc] initWithAdSize:size];
+        _bannerView = [[GADBannerView alloc] initWithAdSize:size];
         _bannerView.delegate = self;
-//        _bannerView.appEventDelegate = self;
         _bannerView.adSizeDelegate = self;
         _bannerView.rootViewController = RCTPresentedViewController();
         [self addSubview:_bannerView];
     }
     _bannerView.adUnitID = _unitId;
     _bannerView.adSize = size;
-    if (_sizes) {
-        if ([_unitId hasPrefix:@"/"]) {
-//            _bannerView.validAdSizes = [RNAdMobCommon stringsToValues:_sizes];
-        } else {
-            RCTLogError(@"Trying to set sizes in non Ad Manager unit Id");
-        }
-    }
     
     GADRequest *request = [RNAdMobCommon buildAdRequest:_requestOptions];
     [_bannerView loadRequest:request];
