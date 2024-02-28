@@ -57,7 +57,6 @@
 + (GADRequest *)buildAdRequest:(NSDictionary *)requestOptions {
     GADRequest *request = [GADRequest request];
     NSMutableDictionary *extras = [@{} mutableCopy];
-    NSMutableDictionary *targets = [@{} mutableCopy];
     
     if (requestOptions[@"requestNonPersonalizedAdsOnly"] && [requestOptions[@"requestNonPersonalizedAdsOnly"] boolValue]) {
         extras[@"npa"] = @"1";
@@ -73,24 +72,6 @@
     GADExtras *networkExtras = [[GADExtras alloc] init];
     networkExtras.additionalParameters = extras;
     [request registerAdNetworkExtras:networkExtras];
-    
-    if (requestOptions[@"keywords"]) {
-        request.keywords = requestOptions[@"keywords"];
-    }
-    
-    
-    if (requestOptions[@"contentUrl"]) {
-        request.contentURL = requestOptions[@"contentUrl"];
-    }
-    
-    if (requestOptions[@"targets"]) {
-        for (NSString *key in requestOptions[@"targets"]) {
-            NSString *value = requestOptions[@"targets"][key];
-            targets[key] = value;
-        }
-    }
-    
-    request.customTargeting = targets;
     
     return request;
 }

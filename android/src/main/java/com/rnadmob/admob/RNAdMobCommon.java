@@ -99,38 +99,6 @@ public class RNAdMobCommon {
 
         builder.addNetworkExtrasBundle(AdMobAdapter.class, extras);
 
-        if (requestOptions.hasKey("keywords")) {
-            ArrayList<Object> keywords = Objects.requireNonNull(requestOptions.getArray("keywords"))
-                    .toArrayList();
-
-            for (Object keyword : keywords) {
-                builder.addKeyword((String) keyword);
-            }
-        }
-
-        if (requestOptions.hasKey("contentUrl")) {
-            builder.setContentUrl(Objects.requireNonNull(requestOptions.getString("contentUrl")));
-        }
-
-        if (requestOptions.hasKey("location")) {
-            ReadableArray locationArray = requestOptions.getArray("location");
-            Location location = new Location("");
-            location.setLatitude(Objects.requireNonNull(locationArray).getDouble(0));
-            location.setLongitude(Objects.requireNonNull(locationArray).getDouble(1));
-
-            builder.setLocation(location);
-        }
-
-        if (requestOptions.hasKey("targets")) {
-            Map<String, Object> networkExtras = Objects.requireNonNull(requestOptions.getMap("targets")).toHashMap();
-
-            for (Map.Entry<String, Object> entry : networkExtras.entrySet()) {
-                String key = entry.getKey();
-                String value = (String) entry.getValue();
-                builder.addCustomTargeting(key, value);
-            }
-        }
-
         return builder.build();
     }
 

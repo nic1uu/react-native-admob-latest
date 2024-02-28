@@ -28,7 +28,7 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
-public class RNAdMobBannerView extends ReactViewGroup implements AppEventListener {
+public class RNAdMobBannerView extends ReactViewGroup {
 
     private AdView adView;
 
@@ -138,13 +138,5 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
         ((ThemedReactContext) getContext())
                 .getJSModule(RCTEventEmitter.class)
                 .receiveEvent(getId(), type, payload);
-    }
-
-    @Override
-    public void onAppEvent(@Nonnull String name, @Nonnull String info) {
-        WritableMap event = Arguments.createMap();
-        event.putString("name", name);
-        event.putString("info", info);
-        sendEvent(EVENT_APP_EVENT, event);
     }
 }
