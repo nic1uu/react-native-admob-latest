@@ -18,7 +18,7 @@ import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdLoadCallback;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.admanager.AdManagerAdRequest;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.ServerSideVerificationOptions;
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
@@ -54,7 +54,7 @@ public abstract class RNAdMobFullScreenAdModule<T> extends ActivityAwareJavaModu
 
     protected abstract String getAdType();
 
-    protected abstract void load(String unitId, AdManagerAdRequest adRequest, AdLoadCallback<T> adLoadCallback, FullScreenContentCallback fullScreenContentCallback);
+    protected abstract void load(String unitId, AdRequest adRequest, AdLoadCallback<T> adLoadCallback, FullScreenContentCallback fullScreenContentCallback);
 
     protected abstract void show(T ad, int requestId);
 
@@ -184,7 +184,7 @@ public abstract class RNAdMobFullScreenAdModule<T> extends ActivityAwareJavaModu
 
         adHolder.remove(requestId);
         currentActivity.runOnUiThread(() -> {
-            AdManagerAdRequest adRequest = RNAdMobCommon.buildAdRequest(Objects.requireNonNull(options.getMap("requestOptions")));
+            AdRequest adRequest = RNAdMobCommon.buildAdRequest(Objects.requireNonNull(options.getMap("requestOptions")));
             AdLoadCallback<T> adLoadCallback = getAdLoadCallback(requestId, options, promise);
             FullScreenContentCallback fullScreenContentCallback = getFullScreenContentCallback(requestId, unitId, options);
             load(unitId, adRequest, adLoadCallback, fullScreenContentCallback);

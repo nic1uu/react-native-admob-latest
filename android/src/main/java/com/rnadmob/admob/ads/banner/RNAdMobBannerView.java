@@ -21,9 +21,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.admanager.AdManagerAdRequest;
-import com.google.android.gms.ads.admanager.AdManagerAdView;
-import com.google.android.gms.ads.admanager.AppEventListener;
+import com.google.android.gms.ads.AdRequest;
 import com.rnadmob.admob.RNAdMobCommon;
 
 import java.util.Objects;
@@ -37,7 +35,7 @@ public class RNAdMobBannerView extends ReactViewGroup implements AppEventListene
     private AdSize size;
     private AdSize[] sizes;
     private String unitId;
-    private AdManagerAdRequest request;
+    private AdRequest request;
 
     public RNAdMobBannerView(Context context) {
         super(context);

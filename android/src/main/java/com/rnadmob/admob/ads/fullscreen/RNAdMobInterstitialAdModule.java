@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.google.android.gms.ads.AdLoadCallback;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.admanager.AdManagerAdRequest;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
@@ -45,7 +45,7 @@ public class RNAdMobInterstitialAdModule extends RNAdMobFullScreenAdModule<Inter
     }
 
     @Override
-    protected void load(String unitId, AdManagerAdRequest adRequest, AdLoadCallback<InterstitialAd> adLoadCallback, FullScreenContentCallback fullScreenContentCallback) {
+    protected void load(String unitId, AdRequest adRequest, AdLoadCallback<InterstitialAd> adLoadCallback, FullScreenContentCallback fullScreenContentCallback) {
         InterstitialAd.load(getReactApplicationContext(), unitId, adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override

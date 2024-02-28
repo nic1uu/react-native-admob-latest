@@ -13,7 +13,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.google.android.gms.ads.AdLoadCallback;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.admanager.AdManagerAdRequest;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
@@ -49,7 +49,7 @@ public class RNAdMobRewardedAdModule extends RNAdMobFullScreenAdModule<RewardedA
     }
 
     @Override
-    protected void load(String unitId, AdManagerAdRequest adRequest, AdLoadCallback<RewardedAd> adLoadCallback, FullScreenContentCallback fullScreenContentCallback) {
+    protected void load(String unitId, AdRequest adRequest, AdLoadCallback<RewardedAd> adLoadCallback, FullScreenContentCallback fullScreenContentCallback) {
         RewardedAd.load(getReactApplicationContext(), unitId, adRequest,
                 new RewardedAdLoadCallback() {
                     @Override

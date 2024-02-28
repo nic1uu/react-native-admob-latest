@@ -54,8 +54,8 @@
     return adSizes;
 }
 
-+ (GAMRequest *)buildAdRequest:(NSDictionary *)requestOptions {
-    GAMRequest *request = [GAMRequest request];
++ (GADRequest *)buildAdRequest:(NSDictionary *)requestOptions {
+    GADRequest *request = [GADRequest request];
     NSMutableDictionary *extras = [@{} mutableCopy];
     NSMutableDictionary *targets = [@{} mutableCopy];
     

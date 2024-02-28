@@ -17,8 +17,9 @@ import com.facebook.react.bridge.WritableMap;
 import com.google.android.gms.ads.AdLoadCallback;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.admanager.AdManagerAdRequest;
 import com.google.android.gms.ads.appopen.AppOpenAd;
+import com.google.android.gms.ads.AdRequest;
+
 
 import java.util.Date;
 
@@ -77,7 +78,7 @@ public class RNAdMobAppOpenAdModule extends RNAdMobFullScreenAdModule<AppOpenAd>
     }
 
     @Override
-    protected void load(String unitId, AdManagerAdRequest adRequest, AdLoadCallback<AppOpenAd> adLoadCallback, FullScreenContentCallback fullScreenContentCallback) {
+    protected void load(String unitId, AdRequest adRequest, AdLoadCallback<AppOpenAd> adLoadCallback, FullScreenContentCallback fullScreenContentCallback) {
         AppOpenAd.load(getReactApplicationContext(), unitId, adRequest, AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
                 new AppOpenAd.AppOpenAdLoadCallback() {
                     @Override
